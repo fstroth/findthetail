@@ -25,26 +25,19 @@
   
 
   
-  
     <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="FindTheTail 1.0 documentation" href="index.html"/>
-        <link rel="next" title="Installation" href="installation.html"/>
-        <link rel="prev" title="Theory" href="theory.html"/> 
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation and Requirements" href="installation.html" />
+    <link rel="prev" title="Theory" href="theory.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -94,7 +87,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="theory.html">Theory</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">How it works</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io_manual.html">Input/Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reports.html">Reports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
@@ -110,7 +103,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">FindTheTail</a>
@@ -118,9 +111,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -186,13 +180,13 @@
 <p>The FTT algorithm consists of the following 9 steps.</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>The loss data are sorted in descending order <span class="math">\(x_1 \geq x_2 \geq \ldots \geq x_n\)</span> .</li>
-<li>Starting with the largest losses <span class="math">\(x_1, x_2\)</span> (k = 2) the generalized Pareto distribution <span class="math">\(\hat{F}(x)\)</span> (= Estimation) is adapted to the data.</li>
-<li>With this distribution the measure of deviation <span class="math">\(AU^2_k\)</span> is calculated.</li>
-<li>Then the next smaller loss is added <span class="math">\((k \rightarrow k + 1)\)</span> and the parameters of the generalized Pareto distribution are re-estimated.</li>
-<li>It continues with point (3) until the last loss value has been processed <span class="math">\((k = n)\)</span>.</li>
-<li>Depending on <span class="math">\(k\)</span>, a time series of the deviation measure results: <span class="math">\(AU^2_k\)</span>.</li>
-<li>The minimal deviation at a particular <span class="math">\(k^* \in [1, n]\)</span> indicates the best fit of a model for the tail to the given loss data and the associated <span class="math">\(x_{k^*}\)</span> corresponds to the sought threshold u.</li>
+<li>The loss data are sorted in descending order <span class="math notranslate nohighlight">\(x_1 \geq x_2 \geq \ldots \geq x_n\)</span> .</li>
+<li>Starting with the largest losses <span class="math notranslate nohighlight">\(x_1, x_2\)</span> (k = 2) the generalized Pareto distribution <span class="math notranslate nohighlight">\(\hat{F}(x)\)</span> (= Estimation) is adapted to the data.</li>
+<li>With this distribution the measure of deviation <span class="math notranslate nohighlight">\(AU^2_k\)</span> is calculated.</li>
+<li>Then the next smaller loss is added <span class="math notranslate nohighlight">\((k \rightarrow k + 1)\)</span> and the parameters of the generalized Pareto distribution are re-estimated.</li>
+<li>It continues with point (3) until the last loss value has been processed <span class="math notranslate nohighlight">\((k = n)\)</span>.</li>
+<li>Depending on <span class="math notranslate nohighlight">\(k\)</span>, a time series of the deviation measure results: <span class="math notranslate nohighlight">\(AU^2_k\)</span>.</li>
+<li>The minimal deviation at a particular <span class="math notranslate nohighlight">\(k^* \in [1, n]\)</span> indicates the best fit of a model for the tail to the given loss data and the associated <span class="math notranslate nohighlight">\(x_{k^*}\)</span> corresponds to the sought threshold u.</li>
 <li>To assess the result, the confidence level is determined. (This describes how large the likelihood of a wrong decision would be, if the adapted distribution and thus the decision for the threshold were rejected)</li>
 <li>For further assurance, the statistics of the standard goodness-of-fit test (CM and AD test) are evaluated.</li>
 </ol>
@@ -208,15 +202,13 @@
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation and Requirements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="theory.html" class="btn btn-neutral" title="Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -232,7 +224,7 @@
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -251,6 +243,7 @@
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
             VERSION:'1.0',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -269,14 +262,11 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
   
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

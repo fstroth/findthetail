@@ -25,27 +25,19 @@
   
 
   
-  
     <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="FindTheTail 1.0 documentation" href="index.html"/>
-        <link rel="up" title="Examples" href="examples.html"/>
-        <link rel="next" title="Cooperation Partners" href="cooperation_partners.html"/>
-        <link rel="prev" title="Example River Nidd" href="river_nidd.html"/> 
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Cooperation Partners" href="cooperation_partners.html" />
+    <link rel="prev" title="Example River Nidd" href="river_nidd.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -95,7 +87,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="theory.html">Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="how_it_works.html">How it works</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation and Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io_manual.html">Input/Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reports.html">Reports</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="examples.html">Examples</a><ul class="current">
@@ -121,7 +113,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">FindTheTail</a>
@@ -129,9 +121,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -360,18 +353,18 @@ div.nboutput div.output_area.stderr {
 </style>
 <div class="section" id="Example-River-Wheaton">
 <h1>Example River Wheaton<a class="headerlink" href="#Example-River-Wheaton" title="Permalink to this headline">¶</a></h1>
-<p>The data consits of 72 exceedances of flood peaks in <span class="math">\(m^3s^{1}\)</span> fo
+<p>The data consits of 72 exceedances of flood peaks in <span class="math notranslate nohighlight">\(m^3s^{1}\)</span> fo
 the Wheaton River near Carcross in Xukon Terrtory, Canda. The 72
 exceedances, for the years 1958 to 1984, are rounded to one decimal
 place. This data set is commonly used in hydrology for model testing.</p>
 <div class="section" id="Load-FindTheTail">
 <h2>Load FindTheTail<a class="headerlink" href="#Load-FindTheTail" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">findthetail.ftt</span> <span class="k">as</span> <span class="nn">ftt</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -380,11 +373,11 @@ place. This data set is commonly used in hydrology for model testing.</p>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># disable warning to keep the output clean</span>
 <span class="c1"># the warning result form divergences in the logarithms in the test statistics</span>
 <span class="n">np</span><span class="o">.</span><span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
@@ -395,11 +388,11 @@ place. This data set is commonly used in hydrology for model testing.</p>
 <div class="section" id="Load-data">
 <h2>Load data<a class="headerlink" href="#Load-data" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">data1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;data/river_wheaton_data.xlsx&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Position&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -408,11 +401,11 @@ place. This data set is commonly used in hydrology for model testing.</p>
 <div class="section" id="Load-data-into-model-and-run-analyse">
 <h2>Load data into model and run analyse<a class="headerlink" href="#Load-data-into-model-and-run-analyse" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># instanciate the Ftt (Find the tail) class with data,</span>
 <span class="c1"># number of mc steps and a name for the report</span>
 <span class="n">mod</span> <span class="o">=</span> <span class="n">ftt</span><span class="o">.</span><span class="n">Ftt</span><span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">mc_steps</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">data_name</span><span class="o">=</span><span class="s1">&#39;River Wheaton&#39;</span><span class="p">)</span>
@@ -435,55 +428,55 @@ Generating plots
 </div>
 <p>Lets take a look at the p-value.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">mod</span><span class="o">.</span><span class="n">p_value_a2</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>Out[5]:
 </pre></div>
 </div>
-<div class="output_area highlight-none"><div class="highlight"><pre>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
 <span></span>0.676
 </pre></div>
 </div>
 </div>
 <p>The error of the p-value is given by
-<span class="math">\(\sigma = \frac{1}{\sqrt{\#MC_{steps}}}\)</span></p>
+<span class="math notranslate nohighlight">\(\sigma = \frac{1}{\sqrt{\#MC_{steps}}}\)</span></p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">mod</span><span class="o">.</span><span class="n">mc_error</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>Out[6]:
 </pre></div>
 </div>
-<div class="output_area highlight-none"><div class="highlight"><pre>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
 <span></span>0.044721359549995794
 </pre></div>
 </div>
 </div>
-<p>Using the <code class="docutils literal"><span class="pre">run_montecarlo_simulation</span></code> function the p-value can be
+<p>Using the <code class="docutils literal notranslate"><span class="pre">run_montecarlo_simulation</span></code> function the p-value can be
 calculated with a smaller error.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">mod</span><span class="o">.</span><span class="n">run_montecarlo_simulation</span><span class="p">(</span><span class="n">mc_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -497,21 +490,21 @@ calculated with a smaller error.</p>
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">mod</span><span class="o">.</span><span class="n">mc_error</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>Out[8]:
 </pre></div>
 </div>
-<div class="output_area highlight-none"><div class="highlight"><pre>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
 <span></span>0.025819888974716113
 </pre></div>
 </div>
@@ -520,11 +513,11 @@ calculated with a smaller error.</p>
 <div class="section" id="Generate-report">
 <h2>Generate report<a class="headerlink" href="#Generate-report" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">mod</span><span class="o">.</span><span class="n">report_html</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -536,9 +529,7 @@ calculated with a smaller error.</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -560,7 +551,7 @@ calculated with a smaller error.</p>
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -579,6 +570,7 @@ calculated with a smaller error.</p>
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
             VERSION:'1.0',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -597,14 +589,11 @@ calculated with a smaller error.</p>
     <script type="text/javascript" src="_static/js/theme.js"></script>
   
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

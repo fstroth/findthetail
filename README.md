@@ -14,4 +14,4 @@ The Documentation can be found ..
 
 ## Installing
 
-    pip install ftt
+    pip install findthetail
