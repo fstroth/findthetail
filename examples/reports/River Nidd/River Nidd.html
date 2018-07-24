@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Tail-Detection</h2>
+            <table class="table">
+                <tr>
+                    <td>Sample size <i>n</i></td>
+                    <td>154</td>
+                </tr>
+                <tr>
+                    <td>Ahmad <i>AU²</i> (optimal)</td>
+                    <td>0.121</td>
+                </tr>
+                <tr>
+                    <td><i>p</i>-Value for choosen parameter set</td>
+                    <td>0.744 (calculated with 500 MC steps)</td>
+                </tr>
+                <tr>
+                    <td>Start of the Tail at datapoint <i>k*</i></td>
+                    <td>34</td>
+                </tr>
+                <tr>
+                    <td>Tail weight <i>k*/n</i></td>
+                    <td>22.1%</td>
+                </tr>
+                <tr>
+                    <td>Threshold <i>u</i></td>
+                    <td>107.58</td>
+                </tr>
+            </table>
+
+            <h2>Goodness-of-Fit Tests</h2>
+            <table class="table">
+                <tr>
+                    <td>Cramér-von Mises <i>W²</i> (<i>p</i>-Value)</td>
+                    <td>0.037 (0.842)</td>
+                </tr>
+                <tr>
+                    <td>Anderson-Darling <i>A²</i> (<i>p</i>-Value)</td>
+                    <td>0.307 (0.736)</td>
+                </tr>
+            </table>
+
+            <h2>Fit Values </h2>
+            <p>Generalized Pareto Distribution with location parameter zero</p>
+            <table class="table">
+                <thead>
+                <th><i>&#958;</i></th>
+                <th><i>&#963;</i></th>
+                </thead>
+                <tr>
+                    <td>-0.09</td>
+                    <td>58.506</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <h2>Risk assessment</h2>
+    <div class="row">
+        <div class="col-md-6" id="quantile">
+            <table class="table">
+                <thead>
+                <th>Quantile</th>
+                <th>Value-at-Risk</th>
+                </thead>
+                
+                <tr>
+                    <td>0.95</td>
+                    <td>188.92</td>
+                </tr>
+                
+                <tr>
+                    <td>0.97</td>
+                    <td>214.48</td>
+                </tr>
+                
+                <tr>
+                    <td>0.99</td>
+                    <td>265.62</td>
+                </tr>
+                
+                <tr>
+                    <td>0.999</td>
+                    <td>357.75</td>
+                </tr>
+                
+            </table>
+        </div>
+        <div class="col-md-6" id="cvar">
+            <table class="table">
+                <thead>
+                <th>Quantile</th>
+                <th>Conditional-Value-at-Risk</th>
+                </thead>
+                
+                    <tr>
+                        <td>0.95</td>
+                        <td>227.01</td>
+                    </tr>
+                
+                    <tr>
+                        <td>0.97</td>
+                        <td>250.46</td>
+                    </tr>
+                
+                    <tr>
+                        <td>0.99</td>
+                        <td>297.39</td>
+                    </tr>
+                
+                    <tr>
+                        <td>0.999</td>
+                        <td>381.92</td>
+                    </tr>
+                
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <h3>Input data</h3>
+        <div class="col">
+            <img src="data.png">
+        </div>
+        <h3>Tail-Detection and Test-Statistics</h3>
+        <div class="col">
+            <img src="test_statistics.png">
+        </div>
+        <h3>Empirical Distribution</h3>
+        <div class="col">
+            <img src="data_empirical.png">
+        </div>
+    </div>
+</div>
+</body>
+</html>
