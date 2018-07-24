@@ -4,7 +4,7 @@ Find The Tail is a procedure that is able to separate a given data set into subs
 
 ## Documentation
 
-The Documentation can be found ..
+The Documentation can be found [here](https://findthetail.readthedocs.io/en/latest/index.html)
 
 ## Requirements
     - numpy
