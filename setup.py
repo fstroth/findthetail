@@ -8,14 +8,14 @@ def read(fname):
 
 setup(
     name="findthetail",
-    version="1.0",
+    version="1.0.2",
     author="Frederik Strothmann",
     author_email="frstrothmann@gmail.com",
     description="Package implementing the tail detection method detaild in the paper https://arxiv.org/abs/1805.10040.",
     license="MIT",
     keywords="extreme value statistics tail detection",
-    url = "https://github.com/fstroth/findthetail",
-    packages= ['findthetail'],
+    url="https://github.com/fstroth/findthetail",
+    packages=['findthetail'],
     package_data={'findthetail': ['templates/*']},
     long_description=read('README.md'),
     classifiers=[
