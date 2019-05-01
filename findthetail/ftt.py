@@ -53,7 +53,7 @@ class Ftt:
             os.mkdir(os.getcwd() + '/reports/' + self.data_name)
 
         # plot the data before is is sorted and prepared
-        self.plot_data(save='save')
+        self.plot_data()
         self.perpare_data()
 
     @staticmethod
@@ -260,7 +260,7 @@ class Ftt:
         plt.savefig(os.getcwd() + '/reports/' + self.data_name + '/data.png')
         plt.close()
 
-    def plot_empirical_distribution(self, closeup=True, save='save'):
+    def plot_empirical_distribution(self, closeup=True, save=True):
         """
         Plots the empirical distribution and saves the plot.
         Args:
@@ -286,7 +286,7 @@ class Ftt:
             a.set_ylim((0.94, 1.005))
             a.hlines((0.95, 0.97, 0.99, 0.999), self.data.min(), self.data.max()*2, alpha=0.3)
             a.set_yticks([0.95, 0.97, 0.99, 0.999])
-            self.plot_empirical_distribution(closeup=False, save='hold')
+            self.plot_empirical_distribution(closeup=False, save=False)
         else:
             plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.3), fontsize=16)
         if save:
