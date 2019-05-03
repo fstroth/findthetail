@@ -13,7 +13,8 @@ import matplotlib.pyplot as plt
 from scipy.stats import genpareto
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from .teststatistics import au2, cramer_von_mises, anderson_darling
+# TODO: FIX THIS LATER
+from teststatistics import au2, cramer_von_mises, anderson_darling
 
 
 class Ftt:
@@ -235,30 +236,28 @@ class Ftt:
 
     def plot_statistics(self):
         """Plots the three test statistics and saves the plot"""
-        plt.plot(self.au_2_data, label='AU2')
-        plt.plot(self.anderson_data, label='Anderson-Darling')
-        plt.plot(self.cramer_data, label='Cramér-von Mises')
-        plt.grid()
-        plt.xlabel(r"Sorted Data Index $k$", fontsize=24)
-        plt.ylabel("Statistics", fontsize=24)
-        plt.xticks(fontsize=20)
-        plt.yticks(fontsize=20)
-        plt.yscale('log')
-        plt.legend(loc='best', fontsize=24)
-        plt.savefig(os.getcwd() + '/reports/' + self.data_name + '/test_statistics.png')
-        plt.close()
+        fig, ax = plt.subplots(1, 1, figsize=(16, 9))
+        ax.plot(self.au_2_data, label='AU2')
+        ax.plot(self.anderson_data, label='Anderson-Darling')
+        ax.plot(self.cramer_data, label='Cramér-von Mises')
+        ax.grid()
+        ax.set_xlabel(r"Sorted Data Index $k$", fontsize=24)
+        ax.set_ylabel("Statistics", fontsize=24)
+        ax.tick_params(labelsize=20)
+        ax.set_yscale('log')
+        ax.legend(loc='best', fontsize=24)
+        fig.savefig(os.getcwd() + '/reports/' + self.data_name + '/test_statistics.png')
 
     def plot_data(self):
         """Plots the data and saves the plot"""
-        plt.plot(np.arange(self.data.size), self.data / self.data.size, label=self.data_name)
-        plt.xlabel(r"Data Index $i$", fontsize=24)
-        plt.ylabel(r"$X_i$", fontsize=24)
-        plt.xticks(fontsize=20)
-        plt.yticks(fontsize=20)
-        plt.grid()
-        plt.legend(loc='best', fontsize=24)
-        plt.savefig(os.getcwd() + '/reports/' + self.data_name + '/data.png')
-        plt.close()
+        fig, ax = plt.subplots(1, 1, figsize=(16, 9))
+        ax.plot(np.arange(self.data.size), self.data / self.data.size, label=self.data_name)
+        ax.set_xlabel(r"Data Index $i$", fontsize=24)
+        ax.set_ylabel(r"$X_i$", fontsize=24)
+        ax.tick_params(labelsize=20)
+        ax.grid()
+        ax.legend(loc='best', fontsize=24)
+        fig.savefig(os.getcwd() + '/reports/' + self.data_name + '/data.png')
 
     def plot_empirical_distribution(self, closeup=True, save=True):
         """
@@ -266,34 +265,34 @@ class Ftt:
         Args:
             closeup (bool): If True the p-value range is set, so that the values of p > 0.95 are shown. This parameter
                             is used to have a closeup in the plot of the empirical distiribution.
-            save (str): If True the plot is saved else, the function just returns None. This is used for the picture in
+            save (bool): If True the plot is saved else, the function just returns None. This is used for the picture in
                         picture of the close up.
 
         Returns: 
             None
         """
-        #TODO: change the hlines in the distribution plot to the given p-values (more consistent)
-        
-        plt.plot(self.data[::-1], np.arange(1, self.data.size+1)/self.data.size, '+r', label='Data')
+        fig, ax = plt.subplots(1, 1, figsize=(16, 9))
+        ax.plot(self.data[::-1], np.arange(1, self.data.size + 1) / self.data.size, '+r', label='Data')
         x = np.arange(self.data[self.optimal_tail_index],
-                      self.data[0]*1.5,
-                      (self.data[0]*1.5 - self.data[self.optimal_tail_index])/100)
-        tw = (self.optimal_tail_index+1)/self.data.size
-        plt.plot(x, (1-tw)+self.rv_list[self.optimal_tail_index].cdf(x-x.min())*tw, label="Generalized Pareto distribution")
+                      self.data[0] * 1.5,
+                      (self.data[0] * 1.5 - self.data[self.optimal_tail_index]) / 100)
+        tw = (self.optimal_tail_index + 1) / self.data.size
+        ax.plot(x, (1 - tw) + self.rv_list[self.optimal_tail_index].cdf(x - x.min()) * tw,
+                label="Generalized Pareto distribution")
+        ax.legend(loc='upper center', bbox_to_anchor=(0.7, 0.9), fontsize=16)
+
         if closeup:
-            a = plt.axes([.4, .2, .45, .45])
-            a.set_xlim([self.data[self.optimal_tail_index] - self.data.std(), self.data[0] * 1.5])
-            a.set_ylim((0.94, 1.005))
-            a.hlines((0.95, 0.97, 0.99, 0.999), self.data.min(), self.data.max()*2, alpha=0.3)
-            a.set_yticks([0.95, 0.97, 0.99, 0.999])
-            self.plot_empirical_distribution(closeup=False, save=False)
-        else:
-            plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.3), fontsize=16)
-        if save:
-            plt.savefig(os.getcwd()+'/reports/' + self.data_name + '/data_empirical.png')
-        else:
-            return
-        plt.close()
+            axins = ax.inset_axes([.35, .1, .6, .6])
+            axins.plot(x, (1 - tw) + self.rv_list[self.optimal_tail_index].cdf(x - x.min()) * tw,
+                       label="Generalized Pareto distribution")
+            axins.plot(self.data[::-1], np.arange(1, self.data.size + 1) / self.data.size, '+r', label='Data')
+            axins.hlines((0.95, 0.97, 0.99, 0.999), self.data.min(), self.data.max() * 2, alpha=0.3)
+
+            axins.set_yticks([0.95, 0.97, 0.99, 0.999])
+            axins.set_xlim([self.data[self.optimal_tail_index] - self.data.std(), self.data[0] * 1.5])
+            axins.set_ylim((0.94, 1.005))
+
+        fig.savefig(os.getcwd() + '/reports/' + self.data_name + '/data_empirical.png')
 
     def report_html(self):
         """
