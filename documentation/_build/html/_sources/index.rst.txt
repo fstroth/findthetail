@@ -21,6 +21,8 @@ The tail model is evaluated further to determine the high quantiles, for risk as
     reports
     examples
     cooperation_partners
+    release_notes
+
 
 ..
     Indices and tables

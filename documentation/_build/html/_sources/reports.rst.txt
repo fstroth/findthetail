@@ -32,4 +32,4 @@ This part contains the Value-at-Risk and the Conditional-Value-at-Risk for the 0
 Plots
 -----
 
-A plot of the input data in unsorted order is plotted.
+A plot of the input data, a plot of the three teststatistics (:math:`AU^2`, Cramér-von Mises and Anderson-Darling) for the different tails and a plot of the fitted tail.

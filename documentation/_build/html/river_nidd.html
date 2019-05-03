@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Example River Nidd &mdash; FindTheTail 1.0 documentation</title>
+  <title>Load FindTheTail &mdash; FindTheTail 1.1 documentation</title>
   
 
   
@@ -17,35 +17,38 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Example River Wheaton" href="river_wheaton.html" />
     <link rel="prev" title="Examples" href="examples.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -59,7 +62,7 @@
             
             
               <div class="version">
-                1.0
+                1.1
               </div>
             
           
@@ -91,17 +94,18 @@
 <li class="toctree-l1"><a class="reference internal" href="io_manual.html">Input/Output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reports.html">Reports</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="examples.html">Examples</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Example River Nidd</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Load-FindTheTail">Load FindTheTail</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Read-data">Read data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Load-data-into-model-and-run-analyse">Load data into model and run analyse</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Generate-report">Generate report</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Load FindTheTail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Read-data">Read data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Load-data-into-model-and-run-analyse">Load data into model and run analyse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Generate-report">Generate report</a></li>
 <li class="toctree-l2"><a class="reference internal" href="river_wheaton.html">Example River Wheaton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="river_wheaton.html#Load-data">Load data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="river_wheaton.html#Load-data-into-model-and-run-analyse">Load data into model and run analyse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="river_wheaton.html#Generate-report">Generate report</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cooperation_partners.html">Cooperation Partners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
 </ul>
 
             
@@ -149,7 +153,7 @@
         
           <li><a href="examples.html">Examples</a> &raquo;</li>
         
-      <li>Example River Nidd</li>
+      <li>Load FindTheTail</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -223,18 +227,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -274,9 +278,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -284,7 +288,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -334,6 +338,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for sphinx_rtd_theme */
 
 /* 24px margin */
@@ -350,17 +388,16 @@ div.nboutput div.output_area.stderr {
 .admonition > p:before {
     margin-right: 4px;  /* make room for the exclamation icon */
 }
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
 </style>
-<div class="section" id="Example-River-Nidd">
-<h1>Example River Nidd<a class="headerlink" href="#Example-River-Nidd" title="Permalink to this headline">¶</a></h1>
-<p>The data consits of 154 exceedances of the threshold level 65
-<span class="math notranslate nohighlight">\(m^3s^{-1}\)</span> by the River Nidd at Hunsingore Weir from 1934 to
-1969. This data set is commonly used in hydrology for model testing.</p>
 <div class="section" id="Load-FindTheTail">
-<h2>Load FindTheTail<a class="headerlink" href="#Load-FindTheTail" title="Permalink to this headline">¶</a></h2>
+<h1>Load FindTheTail<a class="headerlink" href="#Load-FindTheTail" title="Permalink to this headline">¶</a></h1>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -371,8 +408,7 @@ div.nboutput div.output_area.stderr {
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -384,10 +420,9 @@ div.nboutput div.output_area.stderr {
 </div>
 </div>
 <div class="section" id="Read-data">
-<h2>Read data<a class="headerlink" href="#Read-data" title="Permalink to this headline">¶</a></h2>
+<h1>Read data<a class="headerlink" href="#Read-data" title="Permalink to this headline">¶</a></h1>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -397,16 +432,15 @@ div.nboutput div.output_area.stderr {
 </div>
 </div>
 <div class="section" id="Load-data-into-model-and-run-analyse">
-<h2>Load data into model and run analyse<a class="headerlink" href="#Load-data-into-model-and-run-analyse" title="Permalink to this headline">¶</a></h2>
+<h1>Load data into model and run analyse<a class="headerlink" href="#Load-data-into-model-and-run-analyse" title="Permalink to this headline">¶</a></h1>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># instanciate the Ftt (Find the tail) class with data,</span>
 <span class="c1"># number of mc steps and a name for the report</span>
-<span class="n">mod</span> <span class="o">=</span> <span class="n">ftt</span><span class="o">.</span><span class="n">Ftt</span><span class="p">(</span><span class="n">river_nidd_data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">mc_steps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">data_name</span><span class="o">=</span><span class="s1">&#39;River Nidd&#39;</span><span class="p">)</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="n">ftt</span><span class="o">.</span><span class="n">Ftt</span><span class="p">(</span><span class="n">river_nidd_data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">mc_steps</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">data_name</span><span class="o">=</span><span class="s1">&#39;River Nidd&#39;</span><span class="p">)</span>
 <span class="n">mod</span><span class="o">.</span><span class="n">run_analysis</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -424,10 +458,9 @@ Generating plots
 </div>
 </div>
 <div class="section" id="Generate-report">
-<h2>Generate report<a class="headerlink" href="#Generate-report" title="Permalink to this headline">¶</a></h2>
+<h1>Generate report<a class="headerlink" href="#Generate-report" title="Permalink to this headline">¶</a></h1>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -435,9 +468,7 @@ Generating plots
 </pre></div>
 </div>
 </div>
-<p>The report can be found
-<a class="reference external" href="./reports/River%20Nidd/River%20Nidd.html">here</a></p>
-</div>
+<p>The report can be found <a class="reference external" href="./reports/River%20Nidd/River%20Nidd.html">here</a></p>
 </div>
 
 
@@ -451,7 +482,7 @@ Generating plots
         <a href="river_wheaton.html" class="btn btn-neutral float-right" title="Example River Wheaton" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="examples.html" class="btn btn-neutral" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="examples.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -460,7 +491,7 @@ Generating plots
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Frederik Strothmann.
+        &copy; Copyright 2019, Frederik Strothmann
 
     </p>
   </div>
@@ -477,36 +508,16 @@ Generating plots
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'1.0',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
