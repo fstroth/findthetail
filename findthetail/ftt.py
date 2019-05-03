@@ -7,6 +7,7 @@
 """
 
 import os
+from multiprocessing import Pool
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -17,7 +18,7 @@ from .teststatistics import au2, cramer_von_mises, anderson_darling
 
 
 class Ftt:
-    def __init__(self, data, data_name, mc_steps=1000):
+    def __init__(self, data, data_name, mc_steps=1000, threads=1):
         self.data = data
         self.data_name = data_name
 
@@ -43,6 +44,8 @@ class Ftt:
         self.rv_list = []
         self.cdf_list = []
 
+        self.threads = threads
+
         # setup matplotlib parameters
         plt.rcParams['figure.figsize'] = 16, 9
 
@@ -58,7 +61,7 @@ class Ftt:
 
     @staticmethod
     def get_significant_digit(number):
-        """Retrurns the fisrt non zero digit after decimal point."""
+        """Retrurns the first non zero digit after decimal point."""
 
         latter_number_part = str(number).split('.')[1]
         if latter_number_part == '0':
@@ -172,11 +175,16 @@ class Ftt:
         mc_counter_au2 = 0
         mc_counter_a2 = 0
         mc_counter_w2 = 0
-        for index, row in enumerate(self.rv_list[self.optimal_tail_index].rvs(size=(mc_steps, self.optimal_tail.size))):
+
+        # make sure every thread has a different seed
+        random_state = np.random.RandomState(np.random.seed())
+
+        random_variates = self.rv_list[self.optimal_tail_index].rvs(size=(mc_steps, self.optimal_tail.size), random_state=random_state)
+        for index, random_variate in enumerate(random_variates):
             print("\t" + str(index) + "/" + str(mc_steps), end='\r', flush=True)
-            fit_out = genpareto.fit(np.sort(row)[::-1], floc=0)
+            fit_out = genpareto.fit(np.sort(random_variate)[::-1], floc=0)
             my_pareto = genpareto(c=fit_out[0], loc=fit_out[1], scale=fit_out[2])
-            cdf_of_tail = np.sort(my_pareto.cdf(row))
+            cdf_of_tail = np.sort(my_pareto.cdf(random_variate))
             if au2(cdf_of_tail) > self.au_2_data[self.optimal_tail_index]:
                 mc_counter_au2 += 1
             if anderson_darling(cdf_of_tail) > self.anderson_data[self.optimal_tail_index]:
@@ -186,20 +194,28 @@ class Ftt:
 
         return mc_counter_au2, mc_counter_a2, mc_counter_w2, mc_steps
 
-    def run_montecarlo_simulation(self, mc_steps=None):
+    def run_montecarlo_simulation(self, mc_steps=None, threads=None):
         """
         Runs the montecarlo simulation and saves the results in class variables.
         
         Args:
-            mc_steps: Number of montecarlo steps.
+            mc_steps: Number of montecarlo steps per thread.
+            threads: Number of threads to use.
 
         Returns:
             None
         """
         if mc_steps is None:
-            mc_counter_au2, mc_counter_a2, mc_counter_w2, mc_steps = self.montecarlo_simulation(mc_steps=self.mc_steps)
-        else:
-            mc_counter_au2, mc_counter_a2, mc_counter_w2, mc_steps = self.montecarlo_simulation(mc_steps=mc_steps)
+            mc_steps = self.mc_steps
+        if threads is None:
+            threads = self.threads
+
+        with Pool(threads) as p:
+            results = p.map(self.montecarlo_simulation, [mc_steps] * threads)
+            for result in results:
+                self.save_montecarlo_information(*result)
+
+    def save_montecarlo_information(self, mc_counter_au2, mc_counter_a2, mc_counter_w2, mc_steps):
         self.mc_steps_run += mc_steps
         self.mc_counter_au2 += mc_counter_au2
         self.mc_counter_a2 += mc_counter_a2
@@ -235,30 +251,30 @@ class Ftt:
 
     def plot_statistics(self):
         """Plots the three test statistics and saves the plot"""
-        plt.plot(self.au_2_data, label='AU2')
-        plt.plot(self.anderson_data, label='Anderson-Darling')
-        plt.plot(self.cramer_data, label='Cramér-von Mises')
-        plt.grid()
-        plt.xlabel(r"Sorted Data Index $k$", fontsize=24)
-        plt.ylabel("Statistics", fontsize=24)
-        plt.xticks(fontsize=20)
-        plt.yticks(fontsize=20)
-        plt.yscale('log')
-        plt.legend(loc='best', fontsize=24)
-        plt.savefig(os.getcwd() + '/reports/' + self.data_name + '/test_statistics.png')
-        plt.close()
+        fig, ax = plt.subplots(1, 1, figsize=(16, 9))
+        ax.plot(self.au_2_data, label='AU2')
+        ax.plot(self.anderson_data, label='Anderson-Darling')
+        ax.plot(self.cramer_data, label='Cramér-von Mises')
+        ax.grid()
+        ax.set_xlabel(r"Sorted Data Index $k$", fontsize=24)
+        ax.set_ylabel("Statistics", fontsize=24)
+        ax.tick_params(labelsize=20)
+        ax.set_yscale('log')
+        ax.legend(loc='best', fontsize=24)
+        fig.savefig(os.getcwd() + '/reports/' + self.data_name + '/test_statistics.png')
+        plt.close(fig)
 
     def plot_data(self):
         """Plots the data and saves the plot"""
-        plt.plot(np.arange(self.data.size), self.data / self.data.size, label=self.data_name)
-        plt.xlabel(r"Data Index $i$", fontsize=24)
-        plt.ylabel(r"$X_i$", fontsize=24)
-        plt.xticks(fontsize=20)
-        plt.yticks(fontsize=20)
-        plt.grid()
-        plt.legend(loc='best', fontsize=24)
-        plt.savefig(os.getcwd() + '/reports/' + self.data_name + '/data.png')
-        plt.close()
+        fig, ax = plt.subplots(1, 1, figsize=(16, 9))
+        ax.plot(np.arange(self.data.size), self.data / self.data.size, label=self.data_name)
+        ax.set_xlabel(r"Data Index $i$", fontsize=24)
+        ax.set_ylabel(r"$X_i$", fontsize=24)
+        ax.tick_params(labelsize=20)
+        ax.grid()
+        ax.legend(loc='best', fontsize=24)
+        fig.savefig(os.getcwd() + '/reports/' + self.data_name + '/data.png')
+        plt.close(fig)
 
     def plot_empirical_distribution(self, closeup=True, save=True):
         """
@@ -266,34 +282,35 @@ class Ftt:
         Args:
             closeup (bool): If True the p-value range is set, so that the values of p > 0.95 are shown. This parameter
                             is used to have a closeup in the plot of the empirical distiribution.
-            save (str): If True the plot is saved else, the function just returns None. This is used for the picture in
+            save (bool): If True the plot is saved else, the function just returns None. This is used for the picture in
                         picture of the close up.
 
         Returns: 
             None
         """
-        #TODO: change the hlines in the distribution plot to the given p-values (more consistent)
-        
-        plt.plot(self.data[::-1], np.arange(1, self.data.size+1)/self.data.size, '+r', label='Data')
+        fig, ax = plt.subplots(1, 1, figsize=(16, 9))
+        ax.plot(self.data[::-1], np.arange(1, self.data.size + 1) / self.data.size, '+r', label='Data')
         x = np.arange(self.data[self.optimal_tail_index],
-                      self.data[0]*1.5,
-                      (self.data[0]*1.5 - self.data[self.optimal_tail_index])/100)
-        tw = (self.optimal_tail_index+1)/self.data.size
-        plt.plot(x, (1-tw)+self.rv_list[self.optimal_tail_index].cdf(x-x.min())*tw, label="Generalized Pareto distribution")
+                      self.data[0] * 1.5,
+                      (self.data[0] * 1.5 - self.data[self.optimal_tail_index]) / 100)
+        tw = (self.optimal_tail_index + 1) / self.data.size
+        ax.plot(x, (1 - tw) + self.rv_list[self.optimal_tail_index].cdf(x - x.min()) * tw,
+                label="Generalized Pareto distribution")
+        ax.legend(loc='upper center', bbox_to_anchor=(0.7, 0.9), fontsize=16)
+
         if closeup:
-            a = plt.axes([.4, .2, .45, .45])
-            a.set_xlim([self.data[self.optimal_tail_index] - self.data.std(), self.data[0] * 1.5])
-            a.set_ylim((0.94, 1.005))
-            a.hlines((0.95, 0.97, 0.99, 0.999), self.data.min(), self.data.max()*2, alpha=0.3)
-            a.set_yticks([0.95, 0.97, 0.99, 0.999])
-            self.plot_empirical_distribution(closeup=False, save=False)
-        else:
-            plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.3), fontsize=16)
-        if save:
-            plt.savefig(os.getcwd()+'/reports/' + self.data_name + '/data_empirical.png')
-        else:
-            return
-        plt.close()
+            axins = ax.inset_axes([.35, .1, .6, .6])
+            axins.plot(x, (1 - tw) + self.rv_list[self.optimal_tail_index].cdf(x - x.min()) * tw,
+                       label="Generalized Pareto distribution")
+            axins.plot(self.data[::-1], np.arange(1, self.data.size + 1) / self.data.size, '+r', label='Data')
+            axins.hlines((0.95, 0.97, 0.99, 0.999), self.data.min(), self.data.max() * 2, alpha=0.3)
+
+            axins.set_yticks([0.95, 0.97, 0.99, 0.999])
+            axins.set_xlim([self.data[self.optimal_tail_index] - self.data.std(), self.data[0] * 1.5])
+            axins.set_ylim((0.94, 1.005))
+
+        fig.savefig(os.getcwd() + '/reports/' + self.data_name + '/data_empirical.png')
+        plt.close(fig)
 
     def report_html(self):
         """
