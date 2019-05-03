@@ -7,18 +7,18 @@
 """
 
 import os
+from multiprocessing import Pool
 
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import genpareto
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-# TODO: FIX THIS LATER
-from teststatistics import au2, cramer_von_mises, anderson_darling
+from .teststatistics import au2, cramer_von_mises, anderson_darling
 
 
 class Ftt:
-    def __init__(self, data, data_name, mc_steps=1000):
+    def __init__(self, data, data_name, mc_steps=1000, threads=1):
         self.data = data
         self.data_name = data_name
 
@@ -43,6 +43,8 @@ class Ftt:
         self.optimal_tail = None
         self.rv_list = []
         self.cdf_list = []
+
+        self.threads = threads
 
         # setup matplotlib parameters
         plt.rcParams['figure.figsize'] = 16, 9
@@ -173,12 +175,16 @@ class Ftt:
         mc_counter_au2 = 0
         mc_counter_a2 = 0
         mc_counter_w2 = 0
-        holder = self.rv_list[self.optimal_tail_index].rvs(size=(mc_steps, self.optimal_tail.size))
-        for index, row in enumerate(self.rv_list[self.optimal_tail_index].rvs(size=(mc_steps, self.optimal_tail.size))):
+
+        # make sure every thread has a different seed
+        random_state = np.random.RandomState(np.random.seed())
+
+        random_variates = self.rv_list[self.optimal_tail_index].rvs(size=(mc_steps, self.optimal_tail.size), random_state=random_state)
+        for index, random_variate in enumerate(random_variates):
             print("\t" + str(index) + "/" + str(mc_steps), end='\r', flush=True)
-            fit_out = genpareto.fit(np.sort(row)[::-1], floc=0)
+            fit_out = genpareto.fit(np.sort(random_variate)[::-1], floc=0)
             my_pareto = genpareto(c=fit_out[0], loc=fit_out[1], scale=fit_out[2])
-            cdf_of_tail = np.sort(my_pareto.cdf(row))
+            cdf_of_tail = np.sort(my_pareto.cdf(random_variate))
             if au2(cdf_of_tail) > self.au_2_data[self.optimal_tail_index]:
                 mc_counter_au2 += 1
             if anderson_darling(cdf_of_tail) > self.anderson_data[self.optimal_tail_index]:
@@ -188,20 +194,28 @@ class Ftt:
 
         return mc_counter_au2, mc_counter_a2, mc_counter_w2, mc_steps
 
-    def run_montecarlo_simulation(self, mc_steps=None):
+    def run_montecarlo_simulation(self, mc_steps=None, threads=None):
         """
         Runs the montecarlo simulation and saves the results in class variables.
         
         Args:
-            mc_steps: Number of montecarlo steps.
+            mc_steps: Number of montecarlo steps per thread.
+            threads: Number of threads to use.
 
         Returns:
             None
         """
         if mc_steps is None:
-            mc_counter_au2, mc_counter_a2, mc_counter_w2, mc_steps = self.montecarlo_simulation(mc_steps=self.mc_steps)
-        else:
-            mc_counter_au2, mc_counter_a2, mc_counter_w2, mc_steps = self.montecarlo_simulation(mc_steps=mc_steps)
+            mc_steps = self.mc_steps
+        if threads is None:
+            threads = self.threads
+
+        with Pool(threads) as p:
+            results = p.map(self.montecarlo_simulation, [mc_steps] * threads)
+            for result in results:
+                self.save_montecarlo_information(*result)
+
+    def save_montecarlo_information(self, mc_counter_au2, mc_counter_a2, mc_counter_w2, mc_steps):
         self.mc_steps_run += mc_steps
         self.mc_counter_au2 += mc_counter_au2
         self.mc_counter_a2 += mc_counter_a2
