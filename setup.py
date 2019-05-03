@@ -8,7 +8,7 @@ def read(fname):
 
 setup(
     name="findthetail",
-    version="1.0.2",
+    version="1.1.0",
     author="Frederik Strothmann",
     author_email="frstrothmann@gmail.com",
     description="Package implementing the tail detection method detaild in the paper https://arxiv.org/abs/1805.10040.",
