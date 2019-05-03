@@ -59,7 +59,7 @@ class Ftt:
 
     @staticmethod
     def get_significant_digit(number):
-        """Retrurns the fisrt non zero digit after decimal point."""
+        """Retrurns the first non zero digit after decimal point."""
 
         latter_number_part = str(number).split('.')[1]
         if latter_number_part == '0':
@@ -173,6 +173,7 @@ class Ftt:
         mc_counter_au2 = 0
         mc_counter_a2 = 0
         mc_counter_w2 = 0
+        holder = self.rv_list[self.optimal_tail_index].rvs(size=(mc_steps, self.optimal_tail.size))
         for index, row in enumerate(self.rv_list[self.optimal_tail_index].rvs(size=(mc_steps, self.optimal_tail.size))):
             print("\t" + str(index) + "/" + str(mc_steps), end='\r', flush=True)
             fit_out = genpareto.fit(np.sort(row)[::-1], floc=0)
@@ -247,6 +248,7 @@ class Ftt:
         ax.set_yscale('log')
         ax.legend(loc='best', fontsize=24)
         fig.savefig(os.getcwd() + '/reports/' + self.data_name + '/test_statistics.png')
+        plt.close(fig)
 
     def plot_data(self):
         """Plots the data and saves the plot"""
@@ -258,6 +260,7 @@ class Ftt:
         ax.grid()
         ax.legend(loc='best', fontsize=24)
         fig.savefig(os.getcwd() + '/reports/' + self.data_name + '/data.png')
+        plt.close(fig)
 
     def plot_empirical_distribution(self, closeup=True, save=True):
         """
@@ -293,6 +296,7 @@ class Ftt:
             axins.set_ylim((0.94, 1.005))
 
         fig.savefig(os.getcwd() + '/reports/' + self.data_name + '/data_empirical.png')
+        plt.close(fig)
 
     def report_html(self):
         """
