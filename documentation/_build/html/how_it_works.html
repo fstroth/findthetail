@@ -189,22 +189,22 @@
 <p>The FTT algorithm consists of the following 9 steps.</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>The loss data are sorted in descending order <span class="math notranslate nohighlight">\(x_1 \geq x_2 \geq \ldots \geq x_n\)</span> .</li>
-<li>Starting with the largest losses <span class="math notranslate nohighlight">\(x_1, x_2\)</span> (k = 2) the generalized Pareto distribution <span class="math notranslate nohighlight">\(\hat{F}(x)\)</span> (= Estimation) is adapted to the data.</li>
-<li>With this distribution the measure of deviation <span class="math notranslate nohighlight">\(AU^2_k\)</span> is calculated.</li>
-<li>Then the next smaller loss is added <span class="math notranslate nohighlight">\((k \rightarrow k + 1)\)</span> and the parameters of the generalized Pareto distribution are re-estimated.</li>
-<li>It continues with point (3) until the last loss value has been processed <span class="math notranslate nohighlight">\((k = n)\)</span>.</li>
-<li>Depending on <span class="math notranslate nohighlight">\(k\)</span>, a time series of the deviation measure results: <span class="math notranslate nohighlight">\(AU^2_k\)</span>.</li>
-<li>The minimal deviation at a particular <span class="math notranslate nohighlight">\(k^* \in [1, n]\)</span> indicates the best fit of a model for the tail to the given loss data and the associated <span class="math notranslate nohighlight">\(x_{k^*}\)</span> corresponds to the sought threshold u.</li>
-<li>To assess the result, the confidence level is determined. (This describes how large the likelihood of a wrong decision would be, if the adapted distribution and thus the decision for the threshold were rejected)</li>
-<li>For further assurance, the statistics of the standard goodness-of-fit test (CM and AD test) are evaluated.</li>
+<li><p>The loss data are sorted in descending order <span class="math notranslate nohighlight">\(x_1 \geq x_2 \geq \ldots \geq x_n\)</span> .</p></li>
+<li><p>Starting with the largest losses <span class="math notranslate nohighlight">\(x_1, x_2\)</span> (k = 2) the generalized Pareto distribution <span class="math notranslate nohighlight">\(\hat{F}(x)\)</span> (= Estimation) is adapted to the data.</p></li>
+<li><p>With this distribution the measure of deviation <span class="math notranslate nohighlight">\(AU^2_k\)</span> is calculated.</p></li>
+<li><p>Then the next smaller loss is added <span class="math notranslate nohighlight">\((k \rightarrow k + 1)\)</span> and the parameters of the generalized Pareto distribution are re-estimated.</p></li>
+<li><p>It continues with point (3) until the last loss value has been processed <span class="math notranslate nohighlight">\((k = n)\)</span>.</p></li>
+<li><p>Depending on <span class="math notranslate nohighlight">\(k\)</span>, a time series of the deviation measure results: <span class="math notranslate nohighlight">\(AU^2_k\)</span>.</p></li>
+<li><p>The minimal deviation at a particular <span class="math notranslate nohighlight">\(k^* \in [1, n]\)</span> indicates the best fit of a model for the tail to the given loss data and the associated <span class="math notranslate nohighlight">\(x_{k^*}\)</span> corresponds to the sought threshold u.</p></li>
+<li><p>To assess the result, the confidence level is determined. (This describes how large the likelihood of a wrong decision would be, if the adapted distribution and thus the decision for the threshold were rejected)</p></li>
+<li><p>For further assurance, the statistics of the standard goodness-of-fit test (CM and AD test) are evaluated.</p></li>
 </ol>
 </div></blockquote>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<ol class="last arabic simple">
-<li>FTT strictly separates the procedure for detecting the threshold and the goodness of fit to evaluate the quality of the fit.</li>
-<li>There is no need for any external parameters, all information are gained form the data alone.</li>
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>FTT strictly separates the procedure for detecting the threshold and the goodness of fit to evaluate the quality of the fit.</p></li>
+<li><p>There is no need for any external parameters, all information are gained form the data alone.</p></li>
 </ol>
 </div>
 </div>

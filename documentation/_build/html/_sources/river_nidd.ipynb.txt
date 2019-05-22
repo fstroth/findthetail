@@ -97,7 +97,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "The report can be found [here](./reports/River Nidd/River Nidd.html)"
+    "The report can be found [here](_static/reports/River Nidd/River Nidd.html)"
    ]
   }
  ],
