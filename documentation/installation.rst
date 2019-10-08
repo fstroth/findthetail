@@ -6,7 +6,7 @@ Installation
 
 The package can be installed from pypi using
 
-        pip install ftt
+        pip install findthetail
 
 Requirements
 ------------
